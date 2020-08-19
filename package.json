@@ -26,10 +26,10 @@
     "postdeploy": "aws cloudfront create-invalidation --distribution-id omitted --paths '/*'",
     "predeploy:prod": "REACT_APP_STAGE=production npm run build",
     "deploy:prod": "aws s3 sync build/ s3://pcr-lab.wellcheck.arizona.edu",
-    "postdeploy:prod": "aws cloudfront create-invalidation --distribution-id EYMC3G8SS13DL --paths '/*'",
+    "postdeploy:prod": "aws cloudfront create-invalidation --distribution-id E38O2OFW1MU7ZR --paths '/*'",
     "predeploy:test": "REACT_APP_STAGE=testing npm run build",
     "deploy:test": "aws s3 sync build/ s3://pcr-lab-test.wellcheck.arizona.edu",
-    "postdeploy:test": "aws cloudfront create-invalidation --distribution-id EKWGZ6DE6K4ZG --paths '/*'",
+    "postdeploy:test": "aws cloudfront create-invalidation --distribution-id BOGUS --paths '/*'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
