@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "PT Serif", serif;
+}
+
+#footer_site {
+  background: #f4ede5;
+  padding: 2.5rem 0;
+  color: #49595e;
+  font-size: .9em;
+}
+
+#logo.webheader, #logo a.webheader, #logo a.webheader:hover {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0c234b;
+  font-size: 1.8em;
+  text-decoration: none;
+  display: flex;
+  line-height: .9em;
+  text-align: left;
+}
+
+@media (min-width: 768px) and (max-width: 1000px){
+
+  .container {
+    width: inherit;
+}
+
+}

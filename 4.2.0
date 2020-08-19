@@ -1,0 +1,4 @@
++ react-native-vector-icons@6.3.0
+updated 1 package and audited 36490 packages in 10.357s
+found 63 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
