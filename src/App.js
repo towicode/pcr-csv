@@ -27,6 +27,11 @@ Amplify.configure({
   API: {
     endpoints: [
       {
+        name: "barcodeLookup",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
+      },
+      {
         name: "pcrUnprocessedSamples",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
