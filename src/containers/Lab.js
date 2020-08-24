@@ -14,14 +14,6 @@ import { Navbar, Button } from "react-bootstrap";
 
 const { RangePicker } = DatePicker;
 
-function onChange(value, dateString) {
-  console.log('Selected Time: ', value);
-
-  dateString = [dateString[0]+":00", dateString[1]+":00"]
-
-  console.log('Formatted Selected Time: ', dateString);
-
-}
 
 function onOk(value) {
   console.log('onOk: ', value);
@@ -35,6 +27,7 @@ export default class Home extends Component {
     this.date2 = React.createRef();
 
     this.datestring = null;
+    this.curpage = 1;
 
     this.state = {
       formstate: 0,
@@ -60,7 +53,7 @@ export default class Home extends Component {
       key: 'barcode',
       render: (a,b,c) => (
         <Space size="middle">
-        {c+1}
+        {10 * (this.curpage - 1) + c+1}
       </Space>
       )
     },
@@ -113,6 +106,7 @@ export default class Home extends Component {
     this.convertToCSV = this.convertToCSV.bind(this);
     this.goBack = this.goBack.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.tableChange = this.tableChange.bind(this);
 
   }
 
@@ -220,6 +214,11 @@ export default class Home extends Component {
     });
   }
 
+  tableChange(pag, filt, sorter, extra){
+    this.curpage = pag.current;
+
+  }
+
   renderDormForm() {
     return (
       <div>
@@ -268,7 +267,8 @@ export default class Home extends Component {
 
         {this.state.formstate == 1 ? 
         <div>
-          <Table columns={this.columns} dataSource={this.state.data} />
+          <h3>Results from {this.datestring[0]} - {this.datestring[1]} found {this.state.data.length} samples</h3> 
+          <Table columns={this.columns} onChange={this.tableChange} dataSource={this.state.data} />
           <Button bsstyle="primary" onClick={this.convertToCSV}>Download CSV</Button>
           <button className="btn btn-default" onClick={this.goBack}>Go Back</button>
 
