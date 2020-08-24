@@ -21,6 +21,7 @@ export default class Vial extends Component {
       spinner: false,
       err: "",
       vialBarcodeFinal: '',
+      rejectReason: ''
     };
 
     this.buffer = ""
@@ -33,6 +34,7 @@ export default class Vial extends Component {
     this.preject = this.preject.bind(this);
     this.resetAll = this.resetAll.bind(this);
     this.rejectCancel = this.rejectCancel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   resetAll(){
@@ -46,12 +48,18 @@ export default class Vial extends Component {
       spinner: false,
       err: "",
       vialBarcodeFinal: '',
+      rejectReason: '',
+      note: ''
     });
   }
 
   _handleKeyDown = (event) => {
 
     if (event.key == "Backspace") {
+
+      if (this.state.formState == 2){
+        return;
+      }
 
       this.st0buffer = "";
       this.buffer = "";
@@ -119,20 +127,20 @@ export default class Vial extends Component {
       }
 
       console.log(this.state.formState);
-      if (this.state.formState == 2) {
-        if (this.buffer.startsWith("x")) {
-          this.buffer = "";
-          this.rejectCancel();
-          event.preventDefault();
-          return;
-        }
+      // if (this.state.formState == 2) {
+      //   if (this.buffer.startsWith("x")) {
+      //     this.buffer = "";
+      //     this.rejectCancel();
+      //     event.preventDefault();
+      //     return;
+      //   }
 
-        if (this.buffer.startsWith("y")) {
-          this.reject();
-          event.preventDefault();
-          return;
-        }
-      }
+      //   if (this.buffer.startsWith("y")) {
+      //     this.reject();
+      //     event.preventDefault();
+      //     return;
+      //   }
+      // }
     }
 
     if (event.key.length !== 1) {
@@ -160,6 +168,10 @@ export default class Vial extends Component {
     //   event.preventDefault();
     //   return;
     // }
+
+    if (this.state.formState == 2) {
+      return;
+    }
     event.preventDefault();
   }
 
@@ -170,6 +182,9 @@ export default class Vial extends Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this._handleKeyDown);
   }
+
+  handleChange(event) {    this.setState({rejectReason: event.target.value});  }
+
 
 
   stepOneSubmit(mycode) {
@@ -304,6 +319,16 @@ export default class Vial extends Component {
                             </h3>
                           </td>
                         </tr>
+                        <tr>
+                          <th id="altfocus" scope="row" className="bg-primary">
+                            <h3 style={{ color: "white" }}>Note:</h3>
+                          </th>
+                          <td>
+                            <h3>
+                              {this.state.note}
+                            </h3>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                     <div>
@@ -340,6 +365,13 @@ export default class Vial extends Component {
                 ) : null}
                 {this.state.formState == 2 ? <div>
                   <h3> Confirm Reject? </h3>
+
+                  <div className="col-xs-12">
+                    <label>Reject Reason: </label>
+                    <input type="text" value={this.state.rejectReason} style={{width: "100%"}} onChange={this.handleChange} />      
+                  </div>
+
+
                   <div className="col-xs-2">
                   </div>
                   <div className="col-xs-4" style={{ textAlign: "center" }}>
@@ -378,7 +410,7 @@ export default class Vial extends Component {
           Authorization: token,
           'Content-Type': 'application/json'
         },
-        body: { vialBarcode: this.state.vialBarcodeFinal, accepted: bool }
+        body: { vialBarcode: this.state.vialBarcodeFinal, accepted: bool, note: this.state.rejectReason == '' ? '' : this.state.rejectReason}
       }
       this.buffer = "";
       this.st0buffer = "";

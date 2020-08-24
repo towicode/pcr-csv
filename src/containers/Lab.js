@@ -60,7 +60,7 @@ export default class Home extends Component {
       key: 'barcode',
       render: (a,b,c) => (
         <Space size="middle">
-        {c}
+        {c+1}
       </Space>
       )
     },
@@ -70,9 +70,14 @@ export default class Home extends Component {
       key: 'barcode',
     },
     {
-      title: 'Time',
-      dataIndex: 'timestamp',
-      key: 'timestamp',
+      title: 'Last Status Update',
+      dataIndex: 'last_status_update',
+      key: 'last_status_update',
+    },
+    {
+      title: 'Collection Time',
+      dataIndex: 'collection_timestamp',
+      key: 'collection_timestamp',
     },
     {
       title: 'NetID',
