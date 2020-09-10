@@ -12,7 +12,7 @@ import t3logo from './images/t3logo.png';
 const oauth = {
   domain: config.cognito.DOMAIN,
   scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-  redirectSignIn: config.cognito.REDIRECT_SIGNIN,
+  redirectSignIn: config.cognito.REDIRECT_SIGNIN.replace(/\/+$/, "") + document.location.pathname.replace(/\/+$/, "") + "/",
   redirectSignOut: config.cognito.REDIRECT_SIGNOUT,
   responseType: 'code' // or token
 };
