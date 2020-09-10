@@ -37,6 +37,11 @@ Amplify.configure({
         region: config.apiGateway.REGION
       },
       {
+        name: "starsSearch",
+        endpoint: config.apiGateway.STACK2URL,
+        region: config.apiGateway.REGION
+      },
+      {
         name: "authzVialScanner",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
