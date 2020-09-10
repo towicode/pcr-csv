@@ -4,7 +4,7 @@ import NotFound from "./containers/NotFound";
 import Lab from "./containers/Lab"
 import Search from "./containers/Search"
 import Vial from "./containers/Vial"
-import Map from "./containers/Map"
+// import Map from "./containers/Map"
 import AppliedRoute from "./components/AppliedRoute";
 
 export default ({ childProps }) =>
