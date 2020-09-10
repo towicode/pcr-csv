@@ -1,7 +1,8 @@
 const dev = {
   apiGateway: {
     REGION: "us-gov-west-1",
-    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd"
+    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd",
+    STACK2URL: "https://hw6nf8z470.execute-api.us-gov-west-1.amazonaws.com/prd"
     // URL: "https://9bm89pl9ak.execute-api.us-west-2.amazonaws.com/dev"
   },
   cognito: {
@@ -17,7 +18,8 @@ const dev = {
 const test = {
   apiGateway: {
     REGION: "us-gov-west-1",
-    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd"
+    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd",
+    STACK2URL: "https://hw6nf8z470.execute-api.us-gov-west-1.amazonaws.com/prd"
     // URL: "https://9bm89pl9ak.execute-api.us-west-2.amazonaws.com/dev"
   },
   cognito: {
@@ -33,7 +35,8 @@ const test = {
 const prod = {
   apiGateway: {
     REGION: "us-gov-west-1",
-    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd"
+    URL: "https://7zj1u3rfy9.execute-api.us-gov-west-1.amazonaws.com/prd",
+    STACK2URL: "https://hw6nf8z470.execute-api.us-gov-west-1.amazonaws.com/prd"
     // URL: "https://9bm89pl9ak.execute-api.us-west-2.amazonaws.com/dev"
   },
   cognito: {

@@ -11,3 +11,19 @@ h3 {
   margin-top: .45em;
   margin-bottom: .45em;
 }
+
+div[title~="sbutton"] label {
+  color: white
+}
+
+.ant-table-container {
+  overflow-x: scroll
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
