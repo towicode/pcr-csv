@@ -325,7 +325,7 @@ export default class Home extends Component {
 
       // Convert gunzipped byteArray back to ascii string:
       var strData = ""
-      var chunks = Math.floor(data.length / 5000);
+      var chunks = Math.ceil(data.length / 5000);
 
 
       var dataChunks = [];
