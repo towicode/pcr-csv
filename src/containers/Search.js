@@ -143,6 +143,25 @@ export default class Home extends Component {
         title: 'test_type',
         dataIndex: 'test_type',
         key: 'test_type',
+        filters: [
+          {
+            text: 'AG',
+            value: 'AG',
+          },
+          {
+            text: 'PCR',
+            value: 'PCR',
+          },
+          {
+            text: 'AB',
+            value: 'AB'
+          },
+          {
+            text: 'CH',
+            value: 'CH'
+          }
+        ],
+        onFilter: (value, record) => record.test_type.indexOf(value) === 0,
       },
       {
         title: 'status',
@@ -154,7 +173,29 @@ export default class Home extends Component {
         title: 'results',
         dataIndex: 'results',
         key: 'results',
-
+        filters: [
+          {
+            text: 'Positive (AG)',
+            value: 'positive',
+          },
+          {
+            text: 'Negative (AG)',
+            value: 'negative',
+          },
+          {
+            text: 'Positive (PCR)',
+            value: 'Detected (Positive)'
+          },
+          {
+            text: 'Negative (PCR)',
+            value: 'Not Detected'
+          },
+          {
+            text: 'invalid',
+            value: 'invalid'
+          }
+        ],
+        onFilter: (value, record) => record.results.indexOf(value) === 0,
       },
       {
         title: 'time',
