@@ -191,6 +191,14 @@ export default class Home extends Component {
             value: 'Not Detected'
           },
           {
+            text: 'Positive (AB)',
+            value: 'Positive',
+          },
+          {
+            text: 'Negative (AB)',
+            value: 'Negative',
+          },
+          {
             text: 'invalid',
             value: 'invalid'
           }
