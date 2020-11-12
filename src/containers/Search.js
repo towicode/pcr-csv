@@ -427,25 +427,12 @@ export default class Home extends Component {
   convertToCSV() {
     const arr = this.state.data;
 
-    
-    // Remove all commas from addresses
-    for (var i = 0; i < arr.length; i++) {
-      var property = "street_address";
-      if (arr[i].hasOwnProperty(property)) {
-        const search = ',';
-        const replaceWith = '';
-        try {
-          const result = arr[i][property].split(search).join(replaceWith);
-          arr[i][property] = result
-        } catch (e) {
-        }
-      }
-    }
+      const array = [Object.keys(arr[0])].concat(arr)
 
-    const array = [Object.keys(arr[0])].concat(arr)
+    console.log(array)
 
     var b = array.map(it => {
-      return Object.values(it).toString()
+      return Object.values(it).map(s => '"' + String(s) + '"').toString()
     }).join('\n')
 
     var element = document.createElement('a');
