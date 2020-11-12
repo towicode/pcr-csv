@@ -427,9 +427,7 @@ export default class Home extends Component {
   convertToCSV() {
     const arr = this.state.data;
 
-      const array = [Object.keys(arr[0])].concat(arr)
-
-    console.log(array)
+    const array = [Object.keys(arr[0])].concat(arr)
 
     var b = array.map(it => {
       return Object.values(it).map(s => '"' + String(s) + '"').toString()
