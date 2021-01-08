@@ -301,6 +301,16 @@ export default class Vial extends Component {
                         </tr>
                         <tr>
                           <th id="altfocus" scope="row" className="bg-primary">
+                            <h3 style={{ color: "white" }}>Test Type:</h3>
+                          </th>
+                          <td>
+                            <h3>
+                              {this.state.test_type}
+                            </h3>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th id="altfocus" scope="row" className="bg-primary">
                             <h3 style={{ color: "white" }}>Status:</h3>
                           </th>
                           <td>
