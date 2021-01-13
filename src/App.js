@@ -32,6 +32,11 @@ Amplify.configure({
         region: config.apiGateway.REGION
       },
       {
+        name: "barcodeChgTest",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
+      },
+      {
         name: "pcrUnprocessedSamples",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION

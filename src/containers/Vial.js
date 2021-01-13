@@ -35,6 +35,7 @@ export default class Vial extends Component {
     this.resetAll = this.resetAll.bind(this);
     this.rejectCancel = this.rejectCancel.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.changeTestType = this.changeTestType.bind(this);
   }
 
   resetAll(){
@@ -199,8 +200,16 @@ export default class Vial extends Component {
         body: { vialBarcode: mycode }
       }
       const result = await API.post("barcodeLookup", "/barcodeLookup", myInit);
-      this.setState({ 'formState': 1, 'spinner': false });
-      this.setState(result);
+
+      if (result.test_type == "PCR"){
+        this.setState({ 'formState': 1, 'spinner': false });
+        this.setState(result);
+      } else {
+        this.setState({ 'formState': 9, 'spinner': false });
+        this.setState(result);
+      }
+
+
       this.st0buffer = "";
     }).catch(error => {
       console.log("Error in Auth.currentSession: " + error);
@@ -405,6 +414,39 @@ export default class Vial extends Component {
                   <div className="col-xs-2">
                   </div>
                 </div> : null}
+                {this.state.formState == 9 ? <div>
+                  <h3> Mistmatched Test Type </h3>
+                  <h4> You are scanning PCR, this test scanned as AG</h4>
+
+                  <h4 style={{ color: "white" }}>NetID: {this.state.uid}</h4>
+                  <h4 style={{ color: "white" }}>Name: {this.state.fname} {this.state.lname}</h4>
+                  <h4 style={{ color: "white" }}>Registered PCR: {this.isRegisteredPCR }</h4>
+                  <h4 style={{ color: "white" }}>Registered AG: {this.isRegisteredAG}</h4>
+
+    
+                  <div className="col-xs-2">
+                  </div>
+                  <div className="col-xs-4" style={{ textAlign: "center" }}>
+                    <button
+                      onClick={this.changeTestType}
+                      type="button"
+                      className="btn btn-lg btn-red mb-8 mt-4"
+                    >
+                      Change to PCR
+                    </button>
+                  </div>
+                  <div className="col-xs-4" style={{ textAlign: "center" }}>
+                    <button
+                      onClick={this.rejectCancel}
+                      type="button"
+                      className="btn btn-lg btn-gray mb-8 mt-4"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <div className="col-xs-2">
+                  </div>
+                </div> : null}
               </div>
             </div>
           )}
@@ -495,7 +537,61 @@ export default class Vial extends Component {
   rejectCancel() {
     this.setState({ formState: 1 })
   }
+  changeTestType(){
 
+    this.setState({ 'spinner': true });
+    Auth.currentSession().then(async session => {
+      const token = session.idToken.jwtToken;
+      let myInit = {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json'
+        },
+        body: { barcode: this.state.vialBarcodeFinal, netid: this.state.uid, oldTestType: "AG", newTestType: "PCR"}
+      }
+      this.buffer = "";
+      this.st0buffer = "";
+      await API.post("barcodeChgTest", "/barcodeChgTest", myInit);
+      this.resetAll();
+      toast.success('🦄 Changed!!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+   
+    }).catch(e => {
+
+      if (e.response.status === 400) {
+        console.log(e.response.data); // Data contains your body
+
+        toast.info(e.response.data.error, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.info("network error", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      this.setState({ 'spinner': false });
+      return [];
+    });
+  }
   renderLander() {
     return (
       <div className="lander">
