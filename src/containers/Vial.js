@@ -21,7 +21,10 @@ export default class Vial extends Component {
       spinner: false,
       err: "",
       vialBarcodeFinal: '',
-      rejectReason: ''
+      rejectReason: '',
+      test_type: '',
+      isRegisteredAG: '',
+      isRegisteredPCR: ''
     };
 
     this.buffer = ""
@@ -50,7 +53,7 @@ export default class Vial extends Component {
       err: "",
       vialBarcodeFinal: '',
       rejectReason: '',
-      note: ''
+      note: '',
     });
   }
 
