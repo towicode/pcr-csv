@@ -40,6 +40,7 @@ export default class Home extends Component {
     this.state = {
       formstate: 0,
       data: [],
+      sites: [],
       searchText: '',
       searchedColumn: '',
       netid: '',
@@ -138,6 +139,13 @@ export default class Home extends Component {
         key: 'subject_netid',
 
         ...this.getColumnSearchProps('netid'),
+      },
+      {
+        title: 'staff_netid',
+        dataIndex: 'staff_netid',
+        key: 'subject_netid',
+
+        ...this.getColumnSearchProps('staff_netid'),
       },
       {
         title: 'test_type',
@@ -311,6 +319,34 @@ export default class Home extends Component {
     this.selectChange = this.selectChange.bind(this);
     this.netidChange = this.netidChange.bind(this);
     this.reset = this.reset.bind(this);
+  }
+
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.authn !== prevProps.authn) {
+      // get list of testing sites
+      let myInit = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const result = await API.post("sampleCollectionSites", "/sampleCollectionSites", myInit);
+      this.setState({ sites: result.sites });
+    }
+  }
+
+
+  async componentDidMount() {
+    if (this.props.authn === 'signedIn') {
+      // get list of testing sites
+      let myInit = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const result = await API.post("sampleCollectionSites", "/sampleCollectionSites", myInit);
+      this.setState({ sites: result.sites });
+    }
   }
 
 
@@ -517,15 +553,9 @@ export default class Home extends Component {
                     </Form.Item>
                     <Form.Item label="Location">
                       <Select onChange={this.selectChange}>
-                        <Select.Option value="McKale">McKale</Select.Option>
-                        <Select.Option value="Phoenix">Phoenix</Select.Option>
-                        <Select.Option value="Rec Center">Rec Center</Select.Option>
-                        <Select.Option value="Likins">Likins</Select.Option>
-                        <Select.Option value="Women and Gender Studies">Women and Gender Studies</Select.Option>
-                        <Select.Option value="Arbol de la Vida">Arbol de la Vida</Select.Option>
-                        <Select.Option value="CATZ">CATZ</Select.Option>
-                        <Select.Option value="Flagstaff">Flagstaff</Select.Option>
-                        <Select.Option value="Any">Any</Select.Option>
+                        {
+                          this.state.sites.map((site) => <Select.Option value={site}>{site}</Select.Option>)
+                        }
                       </Select>
                     </Form.Item>
 

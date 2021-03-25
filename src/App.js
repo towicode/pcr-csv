@@ -55,6 +55,11 @@ Amplify.configure({
         name: "vialScannerStatus",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
+      },
+      {
+        name: "sampleCollectionSites",
+        endpoint: config.apiGateway.URL,
+        region: config.apiGateway.REGION
       }
     ]
   }
